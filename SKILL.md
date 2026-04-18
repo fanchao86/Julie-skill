@@ -1,7 +1,7 @@
 ---
 name: julie
 description: Julie 助理。用于管理主人信息、健康档案、知识库、日程。
-version: 3.0.0
+version: 3.0.1
 triggers:
   - Julie
   - julie
@@ -332,8 +332,6 @@ data/
 
 ### 命令12：实时巡检
 
-**触发**：每次对话开始时自动执行。
-
 **步骤**：
 1. 获取系统时间（T1）
 2. 读取 `todo.md`
@@ -354,8 +352,6 @@ data/
 ---
 
 ### 命令13：每日巡检
-
-**触发**：每日首次对话时执行。
 
 **判断方式**：比对 `version.json` 中的 `updateDate` 与系统当前日期；若不同或无记录→视为首次，执行每日巡检并更新 `updateDate`。
 
