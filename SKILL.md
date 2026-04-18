@@ -1,6 +1,6 @@
 ---
 name: julie
-description: Julie 助理。用于管理主人信息、健康档案、知识库、日程任务与提醒事项。
+description: Julie 助理。用于管理主人信息、健康档案、知识库、日程。
 version: 3.0.0
 triggers:
   - Julie
