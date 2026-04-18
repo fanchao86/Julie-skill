@@ -1,7 +1,7 @@
 # Julie - 私人助理 Skill
 
 私人事务管理助理，管理主人信息、健康档案、知识库、日程任务与提醒事项。
-当前版本 v3.0.2
+当前版本 v3.1.0
 
 ## 架构
 
@@ -89,10 +89,13 @@ git clone <repo-url> <skills-path>/julie
 ```
 cron(action="add", job={
   name: "银行提醒",
-  schedule: {kind: "at", at: "2026-04-18T15:00:00+08:00"},
-  payload: {kind: "agentTurn", text: "下午3点去银行处理汇款"}
+  schedule: {kind: "at", at: "2026-04-18T14:50:00+08:00"},
+  payload: {kind: "agentTurn", message: "使用julie技能执行-实时巡检 + 下午3点去银行处理汇款", model: ""},
+  sessionTarget: "isolated"
 })
 ```
+
+> 提醒时间 = 日程时间 - 10分钟（如日程15:00，则提醒14:50）
 
 ### 巡检机制
 
