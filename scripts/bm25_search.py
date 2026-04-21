@@ -253,7 +253,7 @@ def rebuild_index(vector_index_path: str, source_entries: List[Dict]) -> None:
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Usage: bm25_search.py <command> <vector_index_path> [args...]")
-        print("Commands: search <query> [top_k], add (stdin JSON), remove <entry_id>, rebuild (stdin JSON array)")
+        print("Commands: search <query> [top_k], add [JSON | stdin], remove <entry_id>, rebuild [JSON | stdin]")
         sys.exit(1)
 
     vector_path = sys.argv[2]
@@ -264,7 +264,10 @@ if __name__ == "__main__":
         results = search(query, vector_path, top_k)
         print(json.dumps(results, ensure_ascii=False, indent=2))
     elif sys.argv[1] == "add":
-        entry = json.loads(sys.stdin.read())
+        if len(sys.argv) > 3:
+            entry = json.loads(sys.argv[3])
+        else:
+            entry = json.loads(sys.stdin.read())
         add_entry(vector_path, entry)
         print("OK")
     elif sys.argv[1] == "remove":
@@ -272,6 +275,9 @@ if __name__ == "__main__":
         ok = remove_entry(vector_path, entry_id)
         print("OK" if ok else "NOT_FOUND")
     elif sys.argv[1] == "rebuild":
-        entries = json.loads(sys.stdin.read())
+        if len(sys.argv) > 3:
+            entries = json.loads(sys.argv[3])
+        else:
+            entries = json.loads(sys.stdin.read())
         rebuild_index(vector_path, entries)
         print("OK")
